@@ -79,3 +79,44 @@ Route::get('/uploadForm', function() {
 });
 
 Route::post('uploadFile', ['as'=>'uploadFile', 'uses'=>'MyController@uploadFile']);
+
+// Get json
+Route::get('getJson', 'MyController@getJson');
+
+// Get view
+Route::get('getMyView', 'MyController@getMyView');
+
+Route::get('showTime/{time}', 'MyController@showTime');
+
+View::share('name', 'Bao Toan');
+
+// Master layout
+Route::get('layout', function() {
+	return view('pages.index');
+});
+
+Route::get('BladeTemplate/{viewName}', 'MyController@blade');
+
+Route::get('GetHello/{name}', 'MyController@getHello');
+
+Route::get('DemoCondition', 'MyController@demoCondition');
+
+
+
+// Database
+Route::get('database', function() {
+	// Schema::create('Categories', function($table) {
+	// 	$table->increments('id');
+	// 	$table->string('name', 100);
+	// });
+
+	Schema::create('Products', function($table) {
+		$table->increments('id');
+		$table->string('name');
+		$table->double('price')->default('0')->nullable();
+		$table->integer('category')->unsigned();
+		$table->foreign('category')->references('id')->on('Categories');
+	});
+
+	echo "Create table successful";
+});

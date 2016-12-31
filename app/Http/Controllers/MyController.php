@@ -58,4 +58,28 @@ class MyController extends Controller
             echo "There is no file to upload";
         }
     }
+
+    public function getJson() {
+        return response()->json(['name'=>'Bao Toan', 'age'=>22]);
+    }
+
+    public function getMyView() {
+        return view('myViews.welcome');
+    }
+
+    public function showTime($time) {
+        return view('myViews.welcome', ['time'=>$time]);
+    }
+
+    public function blade($viewName) {
+        return view('pages.'.$viewName);
+    }
+
+    public function getHello($name) {
+        return view('pages.welcome', ['name'=>$name]);
+    }
+
+    public function demoCondition() {
+        return view('pages.condition', ['name'=>'Bao Toan']);
+    }
 }
